@@ -1,0 +1,22 @@
+package Exception;
+
+import java.util.Scanner;
+
+public class ExemploTryCatch {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            int num1=Integer.parseInt(JOptionPane.showInputDialog("Digite um Nº Inteiro"));
+            int num2=Integer.parseInt(JOptionPane.showInputDialog("Digite outro Nº Inteiro"));
+            int op=Integer.parseInt(JOptionPane.showInputDialog("Digite a operação matemática desejada: 1-Adição:\n2-Subtração:\n3-Multiplicação:\n4-Divisão:"));
+            int result=0;
+            if (op==1){
+                
+            }
+           
+            
+        } catch (Exception e) {
+            System.out.println("ERRO - Valor digitado nao e um numero inteiro!");
+        }
+    }
+}
