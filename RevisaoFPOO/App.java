@@ -3,7 +3,6 @@ package RevisaoFPOO;
 import javax.swing.JOptionPane;
 
 import RevisaoFPOO.Agenda.Agenda;
-import RevisaoFPOO.Cadastro.Animal;
 import RevisaoFPOO.Cadastro.Cachorro;
 import RevisaoFPOO.Cadastro.Gato;
 import RevisaoFPOO.Cadastro.OutrosAnimais;

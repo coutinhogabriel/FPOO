@@ -1,6 +1,5 @@
 package Exception;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class ExemploThrow {
