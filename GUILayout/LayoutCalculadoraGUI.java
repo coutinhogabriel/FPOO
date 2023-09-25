@@ -13,24 +13,31 @@ public class LayoutCalculadoraGUI {
 
     public LayoutCalculadoraGUI() {
         // Configuração da janela principal
-        JFrame janelaP = new JFrame("LayoutCalculadora");
+        JFrame janelaP = new JFrame("Calculadora"); // Alteração do título
         BorderLayout border = new BorderLayout();
         janelaP.setLayout(border);
         JPanel painelV = new JPanel(); // Painel para o visor e rótulo
         JPanel painelB = new JPanel(); // Painel para os botões
         janelaP.getContentPane().add(painelB, BorderLayout.CENTER);
         janelaP.getContentPane().add(painelV, BorderLayout.NORTH);
+        painelB.setBackground(Color.gray); // Altera cor do fundo dos botões
+        painelV.setBackground(Color.white); // Altera cor do fundo do display
 
         // Campo de texto onde os números e o resultado são exibidos
-        caixa1 = new JTextField(20);
-        caixa1.setPreferredSize(new Dimension(caixa1.getPreferredSize().width, 25)); // Aumenta a altura para 25 pixels
+        caixa1 = new JTextField(15);
+        caixa1.setPreferredSize(new Dimension(caixa1.getPreferredSize().width, 50));
+        caixa1.setFont(new Font("Arial", Font.PLAIN, 24)); // Altera Fonte e tamanho do texto no display
+        caixa1.setHorizontalAlignment(JTextField.RIGHT); // Alinha o texto à direita
+        caixa1.setEditable(false); //Não permite digitar pelo teclado do note
+        caixa1.setBackground(Color.white); // Altera cor do visor
 
         operacaoLabel = new JLabel(""); // Rótulo inicialmente vazio para a operação
+        operacaoLabel.setFont(new Font("Arial", Font.PLAIN, 18)); // Altera Fonte e tamanho do texto na operação do lado do display
         painelV.add(caixa1);
         painelV.add(operacaoLabel); // Adiciona o rótulo ao painel
 
         // Layout da grade para os botões
-        GridLayout grid = new GridLayout(4, 4, 2, 2);
+        GridLayout grid = new GridLayout(4, 4, 10, 10); // Aumento do espaçamento
         painelB.setLayout(grid);
 
         // Textos dos botões
@@ -39,6 +46,8 @@ public class LayoutCalculadoraGUI {
         // Adiciona botões à grade
         for (int i = 0; i < textBotoes.length; i++) {
             JButton button = new JButton(textBotoes[i]);
+            button.setFont(new Font("Arial", Font.PLAIN, 32)); // Fonte e no tamanho dos numeros dos botões
+            button.setBackground(Color.white); // Altera cor dos botões
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     botaoClicado(e.getActionCommand()); // Trata o clique no botão
@@ -49,7 +58,7 @@ public class LayoutCalculadoraGUI {
 
         // Configurações da janela principal
         janelaP.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janelaP.setBounds(500, 200, 400, 450); // Define o tamanho da janela
+        janelaP.setBounds(500, 200, 500, 600); // Ajuste do tamanho da janela
         janelaP.setVisible(true);
     }
 
@@ -61,7 +70,7 @@ public class LayoutCalculadoraGUI {
             numeroAnterior = 0;
             operador = "";
             novoNumero = true;
-        } else if (textoBotao.matches("[0-9]")) {
+        } else if (textoBotao.matches("[0-9]")) {  //regex permite ler intervalos
             if (novoNumero) {
                 caixa1.setText(textoBotao);
                 novoNumero = false;
@@ -117,7 +126,7 @@ public class LayoutCalculadoraGUI {
             operacaoLabel.setText(""); // Limpa o rótulo da operação
         }
     }
-
+    // Rodar o programa sem precisar utilizar o App.java
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LayoutCalculadoraGUI());
     }
