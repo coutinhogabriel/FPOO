@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Exercicios5CardLayout extends JFrame {
+    public class Exercicios5CardLayout extends JFrame {
     private JPanel cards; // Painel para usar CardLayout
     private int score = 0; // Variável para armazenar a pontuação
 
@@ -156,4 +156,5 @@ public class Exercicios5CardLayout extends JFrame {
         });
     }
 }
+
 
