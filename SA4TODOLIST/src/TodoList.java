@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane; // Importe a classe JOptionPane para exibir a mensagem de confirmação
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class TodoList extends JFrame {
     public TodoList() {
         super("To-Do List App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(400, 300);
+        this.setSize(500, 300);
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -65,7 +66,15 @@ public class TodoList extends JFrame {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteTask();
+                // Mensagem de confirmação antes de excluir
+                int selectedIndex = taskList.getSelectedIndex();
+                if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+                    int option = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (option == JOptionPane.YES_OPTION) {
+                        tasks.remove(selectedIndex);
+                        updateTaskList();
+                    }
+                }
             }
         });
 
@@ -95,7 +104,14 @@ public class TodoList extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-                    deleteTask();
+                    // Adicione uma mensagem de confirmação antes de excluir
+                    int selectedIndex = taskList.getSelectedIndex();
+                    if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+                        int option = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                        if (option == JOptionPane.YES_OPTION) {
+                            deleteTask();
+                        }
+                    }
                 }
             }
         });
