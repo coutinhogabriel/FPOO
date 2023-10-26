@@ -1,8 +1,5 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +14,8 @@ public class CadastroUsuarios extends JPanel {
     private JTextField inputIdade;
     private DefaultTableModel tableModel;
     private JTable table;
-    public List<Usuario> usuarios = new ArrayList<>();
+
+    private List<Usuario> usuarios = new ArrayList<>();
     private int linhaSelecionada = -1;
 
     public CadastroUsuarios() {
@@ -25,10 +23,8 @@ public class CadastroUsuarios extends JPanel {
         tableModel = new DefaultTableModel();
         tableModel.addColumn("Nome");
         tableModel.addColumn("Idade");
-
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
-
         inputNome = new JTextField(20);
         inputIdade = new JTextField(5);
         JButton cadastrarButton = new JButton("Cadastrar");
@@ -36,7 +32,6 @@ public class CadastroUsuarios extends JPanel {
         JButton apagarButton = new JButton("Apagar");
         JButton apagarTodosButton = new JButton("Apagar Todos");
         JButton salvarButton = new JButton("Salvar");
-
         JPanel inputPanel = new JPanel();
         inputPanel.add(new JLabel("Nome:"));
         inputPanel.add(inputNome);
@@ -47,19 +42,16 @@ public class CadastroUsuarios extends JPanel {
         inputPanel.add(apagarButton);
         inputPanel.add(apagarTodosButton);
         inputPanel.add(salvarButton);
-
         setLayout(new BorderLayout());
         add(inputPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-        
+        //deserialização quando abre o app
         File arquivo = new File("dados.txt");
-        List<Usuario> usuarios = new ArrayList<>();
         if (arquivo.exists()) {
             usuarios = Serializacao.deserializar("dados.txt");
             atualizarTabela();
         }
-        
-
+        //tratamentos de eventos
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -67,12 +59,11 @@ public class CadastroUsuarios extends JPanel {
                 if (linhaSelecionada != -1) {
                     inputNome.setText((String) table.getValueAt(linhaSelecionada, 0));
                     inputIdade.setText(table.getValueAt(linhaSelecionada, 1).toString());
+
                 }
             }
         });
-
         OperacoesUsuarios operacoes = new OperacoesUsuarios(usuarios, tableModel, table);
-
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,28 +72,27 @@ public class CadastroUsuarios extends JPanel {
                 inputIdade.setText("");
             }
         });
-
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                operacoes.atualizarUsuario(linhaSelecionada, inputNome.getText(), inputIdade.getText());
+                operacoes.atualizarUsuario(linhaSelecionada, inputNome.getText(),
+
+                        inputIdade.getText());
+
             }
         });
-
         apagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 operacoes.apagarUsuario(linhaSelecionada);
             }
         });
-
         apagarTodosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 operacoes.apagarTodosUsuarios();
             }
         });
-
         salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,11 +103,9 @@ public class CadastroUsuarios extends JPanel {
 
     private void atualizarTabela() {
         tableModel.setRowCount(0);
-        
         for (Usuario usuario : usuarios) {
             tableModel.addRow(new Object[] { usuario.getNome(), usuario.getIdade() });
         }
     }
-    
 
 }
