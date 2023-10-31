@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "GUISerializacao copy/src",
+        "JDBCMavenTeste/src/main/java/app"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\DevNoturno\\Downloads\\postgresql-42.6.0.jar"
+    ]
+}
